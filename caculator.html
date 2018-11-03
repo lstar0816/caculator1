@@ -1,0 +1,239 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算器</title>
+	</head>
+
+	<body>
+    <input type="text" name="input-text" id="input-text" value="0">
+        <div class="switch_circle">
+        <input type="button" value="Rad" class="not-number"  id=rad onclick="turn_rad()">
+        <input type="button" value="°" class="not-number"  id=degreed onclick="turn_degreed()">
+        </div>
+        <input type="button" value="x!" class="not-number" onclick="factorial()">
+        <input type="button" value="(" class="not-number" onclick="input_element('(')">
+        <input type="button" value=")" class="not-number" onclick="input_element(')')">
+        <input type="button" value="%" class="not-number" onclick="per_cent()">
+        <input type="button" value="AC" class="not-number" onclick="return0()"><br>
+        <input type="button" value="lnv" class="not-number">
+        <input type="button" value="sin" class="not-number" onclick="return_sin()">
+        <input type="button" value="ln" class="not-number" onclick="return_ln()">
+        <input type="button" value="7" class="number" onclick="input_element(7)">
+        <input type="button" value="8" class="number" onclick="input_element(8)">
+        <input type="button" value="9" class="number" onclick="input_element(9)">
+        <input type="button" value="÷" class="not-number" onclick="input_element('/')"><br>
+        <input type="button" value="π" class="not-number" onclick="input_element(Math.PI)">
+        <input type="button" value="cos" class="not-number" onclick="return_cos()">
+        <input type="button" value="log" class="not-number" onclick="return_log()">
+        <input type="button" value="4" class="number" onclick="input_element(4)">
+        <input type="button" value="5" class="number" onclick="input_element(5)">
+        <input type="button" value="6" class="number" onclick="input_element(6)">
+        <input type="button" value="×" class="not-number" onclick="input_element('*')"><br>
+        <input type="button" value="e" class="not-number" onclick="input_element(Math.E)">
+        <input type="button" value="tan" class="not-number" onclick="return_tan()">
+        <input type="button" value="√" class="not-number" onclick="return_sqrt()">
+        <input type="button" value="1" class="number" onclick="input_element(1)">
+        <input type="button" value="2" class="number" onclick="input_element(2)">
+        <input type="button" value="3" class="number" onclick="input_element(3)">
+        <input type="button" value="-" class="not-number" onclick="input_element('-')"><br>
+        <input type="button" value="Ans" class="not-number" onclick="input_element(ans)">
+        <input type="button" value="EXP" class="not-number" onclick="return_EXP()">
+        <input type="button" value="x^y" class="not-number" onclick="x_y()">
+        <input type="button" value="0" class="number" onclick="input_element(0)">
+        <input type="button" value="." class="number" onclick="input_point()">
+        <input type="button" value="=" class="equal" onclick="caculate()">
+        <input type="button" value="+" class="not-number" onclick="input_element('+')"><br>
+
+
+    <style type="text/css">
+    #input-text{
+    width: 577px;
+    height: 40px;
+    text-align: right;
+    padding: 10px 10px 10px 10px;
+    font-size: 25px;
+    display: block;
+    }
+
+    .not-number{
+    font-size: 18px;
+    width: 70px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 0;
+    background: #e4e2e2;
+    border: 0;
+    }
+
+    .not-number:active{
+    background: #dcdada;
+    }
+
+    .number{
+    font-size: 18px;
+    width: 70px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 0;
+    border: 0;
+    background: #f3f3f3;
+    }
+
+    .number:active{
+    background: #e9e8e8;
+    }
+
+    .equal{
+    color: #fff;
+    font-size: 22px;
+    width: 70px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 0;
+    border: 0;
+    background: #74aeff;
+    }
+
+    .equal:active{
+    background: #7488ff;
+    }
+
+    .switch_circle{
+    display: inline;
+    clear:left;
+    }
+
+    #rad{
+    background:#74aeff;
+    }
+	</style>
+
+
+
+
+    <script type="text/javascript">
+
+    var show = document.getElementById("input-text");
+    var point_number = 0;
+    var text_1 = "";
+    var style = "rad";
+    var ans;
+
+
+    function input_element(num){
+        if(show.value == "0")
+            show.value = num;
+        else
+            show.value += num;
+    }
+
+    function input_point(){
+        if(point_number == 0)
+            show.value += '.';
+        else
+            show.value = show.value;
+        point_number = 1;
+    }
+
+    function return0()
+    {
+        text_1 = "";
+        show.value = "0";
+        point_number = 0;
+    }
+
+    function caculate()
+    {
+        if(text_1 == "")
+            show.value = eval(show.value);
+        else
+            show.value = Math.pow(text_1,show.value);
+        ans = show.value;
+    }
+
+    function per_cent()
+    {
+        show.value = eval(show.value * 100) + '%';
+    }
+
+    function factorial()
+    {
+        var i;
+		var result = 1;
+		for(i=1;i<=show.value;i++)
+			result *= i;
+		show.value = result;
+    }
+
+    function return_EXP()
+    {
+        show.value = Math.exp(show.value);
+    }
+
+    function return_sin()
+    {
+        if(style == "rad")
+            show.value = Math.sin(show.value);
+        else
+            show.value = Math.sin(eval(show.value*Math.PI/180));
+    }
+
+    function return_cos()
+    {
+        if(style == "rad")
+            show.value = Math.cos(show.value);
+        else
+            show.value = Math.cos(eval(show.value*Math.PI/180));
+    }
+
+    function return_tan()
+    {
+        if(style == "rad")
+            show.value = Math.tan(show.value);
+        else
+            show.value = Math.tan(eval(show.value*Math.PI/180));
+    }
+
+    function return_sqrt()
+    {
+        show.value = Math.sqrt(show.value);
+    }
+
+    function return_ln()
+    {
+        show.value = Math.log(show.value);
+    }
+
+    function return_log()
+    {
+        show.value = Math.log10(show.value);
+    }
+
+    function x_y()
+    {
+        text_1 = show.value;
+        show.value = 0;
+    }
+
+    function turn_rad()
+    {
+        style = "rad";
+        document.getElementById("rad").style.background='#74aeff';
+        document.getElementById("degreed").style.background='#e4e2e2';
+    }
+
+    function turn_degreed()
+    {
+        style = "degreed";
+        document.getElementById("rad").style.background='#e4e2e2';
+        document.getElementById("degreed").style.background='#74aeff';
+    }
+	</script>
+
+
+
+	</body>
+</html>
